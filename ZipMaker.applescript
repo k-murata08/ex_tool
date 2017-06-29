@@ -35,7 +35,7 @@ on randomHashByStrLen(aLen, aButton)
 	set pass to ""
 	set hashCharacter to "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwsyz0123456789"
 	if aButton is "âpêîéö&ãLçÜ" then
-		set hashCharacter to hashCharacter & "#$%&\@_"
+		set hashCharacter to hashCharacter & "#$%&\@_{}()<>+-"
 	end if
 	set hashCnt to count of hashCharacter
 	repeat aLen times
@@ -64,10 +64,10 @@ on compressFolderByZip(f, aPassword, fBtn)
 			set AppleScript's text item delimiters to tmp
 			
 			set cmd1 to "cd " & sourcePath
-			set cmd2 to "zip -P " & aPassword & " " & zipPath & " " & fname
+			set cmd2 to "zip -P Ä"" & aPassword & "Ä" " & zipPath & " " & fname
 		else
 			set cmd1 to "cd " & sourcePath & ".."
-			set cmd2 to "zip -rP " & aPassword & " " & zipPath & " " & fname
+			set cmd2 to "zip -rP Ä"" & aPassword & "Ä" " & zipPath & " " & fname
 		end if
 		
 		do shell script cmd1 & ";" & cmd2
