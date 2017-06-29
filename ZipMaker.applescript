@@ -9,6 +9,7 @@ on run
 		end if
 	on error
 		display alert "処理が中断されました"
+		quit
 	end try
 	
 	display dialog "圧縮ファイルのパスワードを自動生成します" & return & "パスワードの形式を選択してください" buttons {"英数字のみ", "英数字&記号"}
@@ -19,6 +20,7 @@ on run
 	
 	if text returned of passTmp is "" then
 		display alert "文字数を入力してください"
+		quit
 	end if
 	
 	set passLen to text returned of passTmp as number
@@ -73,6 +75,7 @@ on compressFolderByZip(f, aPassword, fBtn)
 		
 	on error
 		display alert "圧縮に失敗しました"
+		quit
 	end try
 end compressFolderByZip
 
