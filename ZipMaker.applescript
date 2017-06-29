@@ -1,32 +1,28 @@
 on run
-	display dialog "パスワードの形式を選択してください" buttons {"英数字のみ", "英数字&記号"}
-	set passBtn to button returned of result
-	
-	
-	display dialog "設定するパスワードの文字数を入力してください" default answer ""
-	set passTmp to result
-	
-	if text returned of passTmp is "" then
-		display alert "文字数を入力してください"
-		quit
-	end if
-	
 	display dialog "圧縮対象を選択してください" buttons {"ファイル", "フォルダ"}
 	set fBtn to button returned of result
-	
 	try
-		set passLen to text returned of passTmp as number
-		set passwd to randomHashByStrLen(passLen, passBtn)
 		if fBtn is "ファイル" then
 			set f to choose file
 		else
 			set f to choose folder
 		end if
-		
 	on error
-		display alert "入力形式が正しくありません"
-		quit
+		display alert "処理が中断されました"
 	end try
+	
+	display dialog "圧縮ファイルのパスワードを自動生成します" & return & "パスワードの形式を選択してください" buttons {"英数字のみ", "英数字&記号"}
+	set passBtn to button returned of result
+	
+	display dialog "設定するパスワードの文字数を入力してください" default answer "" with number
+	set passTmp to result
+	
+	if text returned of passTmp is "" then
+		display alert "文字数を入力してください"
+	end if
+	
+	set passLen to text returned of passTmp as number
+	set passwd to randomHashByStrLen(passLen, passBtn)
 	compressFolderByZip(f, passwd, fBtn)
 end run
 
@@ -37,7 +33,7 @@ on randomHashByStrLen(aLen, aButton)
 	set pass to ""
 	set hashCharacter to "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwsyz0123456789"
 	if aButton is "英数字&記号" then
-		set hashCharacter to hashCharacter & "#$%&!?\@+"
+		set hashCharacter to hashCharacter & "#$%&\@_"
 	end if
 	set hashCnt to count of hashCharacter
 	repeat aLen times
@@ -77,7 +73,6 @@ on compressFolderByZip(f, aPassword, fBtn)
 		
 	on error
 		display alert "圧縮に失敗しました"
-		quit
 	end try
 end compressFolderByZip
 
