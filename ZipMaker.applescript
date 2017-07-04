@@ -35,7 +35,7 @@ on randomHashByStrLen(aLen, aButton)
 	set pass to ""
 	set hashCharacter to "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwsyz0123456789"
 	if aButton is "‰p”š&‹L†" then
-		set hashCharacter to hashCharacter & "#$%&\@_{}()<>+-"
+		set hashCharacter to hashCharacter & "$&!=.[]@_{}()^+$&!=.[]@_{}()^+"
 	end if
 	set hashCnt to count of hashCharacter
 	repeat aLen times
