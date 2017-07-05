@@ -1,5 +1,5 @@
 on run
-	display dialog "圧縮対象を選択してください" buttons {"ファイル", "フォルダ"}
+	display dialog "圧縮対象を選択してください" buttons {"ファイル", "ディレクトリ"}
 	set fBtn to button returned of result
 	try
 		if fBtn is "ファイル" then
@@ -57,7 +57,7 @@ on compressFolderByZip(f, aPassword, fBtn)
 		set sourcePath to POSIX path of f
 		
 		if fBtn is "ファイル" then
-			-- ファイルへのパスから、フォルダまでのパスをsourcePathとする --
+			-- ファイルへのパスから、ディレクトリまでのパスをsourcePathとする --
 			set tmp to AppleScript's text item delimiters
 			set AppleScript's text item delimiters to "/"
 			set sourcePath to text from text item 1 to text item -2 of (sourcePath as string)
